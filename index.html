@@ -23,7 +23,7 @@
       <div class="title" text-align="center">
         <h5>STUDENT REGISTRATION FORM </h5>
       </div>
-      <form action="POST" data-netlify="true">
+      <form method="POST" action="registration.php" data-netlify="true">
         <div class="form">
           <div class="inputfield">
             <label>Surname</label>
@@ -31,7 +31,7 @@
               type="text"
               class="input"
               id="name"
-              name="fname"
+              name="surname"
               placeholder="Enter Surname"
               maxlength="30"
               pattern="[A-Za-z]{1,32}"
@@ -46,7 +46,7 @@
               type="text"
               class="input"
               id="name"
-              name="lname"
+              name="name"
               placeholder="Enter Name"
               maxlength="30"
               pattern="[A-Za-z]{1,32}"
@@ -61,7 +61,7 @@
               type="text"
               class="input"
               id="name"
-              name="lname"
+              name="fname"
               placeholder="Enter Father's Name"
               maxlength="30"
               pattern="[A-Za-z]{1,32}"
@@ -76,7 +76,7 @@
               type="text"
               class="input"
               id="name"
-              name="lname"
+              name="mname"
               placeholder="Enter Mother's Name"
               maxlength="30"
               pattern="[A-Za-z]{1,32}"
@@ -170,9 +170,9 @@
               id="name"
               name="schoolname"
               placeholder="Enter School Name"
-              maxlength="30"
-              pattern="[A-Za-z]{1,32}"
-              title="Enter only alphabets"
+              maxlength="100"
+              pattern="[a-zA-Z][a-zA-Z0-9\s]*"
+              title="Enter only alphabets and spaces"
               required
             />
           </div>
@@ -186,6 +186,7 @@
                         type="text"
                         class="inputhsc"
                         placeholder="HSC Seat No"
+                        name="hseatno"
                         required
                       />
                     </td>
@@ -195,6 +196,7 @@
                         type="text"
                         class="inputgujcet"
                         placeholder="Passing Year"
+                        name="hpassing"
                         required
                       />
                     </td>
@@ -208,6 +210,7 @@
                       type="text"
                       class="inputgujcet"
                       placeholder="GUJCET App No"
+                      name="gujappno"
                       required
                     />
                   </td>
@@ -217,6 +220,7 @@
                       type="text"
                       class="inputgujcet"
                       placeholder="GUJCET Seat No"
+                      name="gujseatno"
                       required
                     />
                   </td>
@@ -245,7 +249,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Mathematics_Marks"
+                    name="Maths"
                     maxlength="3"
                   />
                 </td>
@@ -253,7 +257,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Gujcet_Marks"
+                    name="Guj_Maths"
                     maxlength="3"
                   />
                 </td>
@@ -265,7 +269,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Chemistry(th)_Marks"
+                    name="Chem"
                     maxlength="3"
                   />
                 </td>
@@ -273,7 +277,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Gujcet_Marks"
+                    name="Guj_Chem"
                     maxlength="3"
                   />
                 </td>
@@ -284,7 +288,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Physics(th)_Marks"
+                    name="Phy"
                     maxlength="3"
                   />
                 </td>
@@ -292,7 +296,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Gujcet_Marks"
+                    name="Guj_Phy"
                     maxlength="3"
                   />
                 </td>
@@ -303,7 +307,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="English_Marks"
+                    name="Eng"
                     maxlength="3"
                   />
                 </td>
@@ -315,7 +319,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Chemistry(pr)_Marks"
+                    name="Chempr"
                     maxlength="3"
                   />
                 </td>
@@ -326,7 +330,7 @@
                   <input
                     type="text"
                     class="inputhsc"
-                    name="English_Marks"
+                    name="aggregate"
                     
                   />
                 </td>
@@ -337,7 +341,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Physics(pr)"
+                    name="Phypr"
                     maxlength="3"
                   />
                 </td>
@@ -347,7 +351,7 @@
                   <input
                     type="text"
                     class="inputhsc"
-                    name="English_Marks"
+                    name="pcm"
                     
                   />
                 </td>
@@ -359,7 +363,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Computer(th)_Marks"
+                    name="Comp"
                     maxlength="3"
                   />
                 </td>
@@ -368,7 +372,7 @@
                   <input
                     type="text"
                     class="inputhsc"
-                    name="English_Marks"
+                    name="gujper"
                     
                   />
                 </td>
@@ -379,7 +383,7 @@
                   <input
                     type="text"
                     class="input1"
-                    name="Computer(pr)"
+                    name="Comppr"
                     maxlength="3"
                   />
                 </td>
@@ -437,7 +441,7 @@
             <input
               type="tel"
               class="input"
-              name="phone-number"
+              name="smobno"
               maxlength="10"
               id="phone-number"
               placeholder="Enter Student phone number"
@@ -457,7 +461,7 @@
             <input
               type="tel"
               class="input"
-              name="phone-number"
+              name="pmobno"
               maxlength="10"
               id="phone-number"
               placeholder="Enter Parents phone number"
@@ -499,8 +503,9 @@
             <button
               type="submit"
               value="Register"
-              class="btn"
-              onclick="checkPassword()"
+              class="btn" 
+              name="register"
+              
             >
               Register
             </button>
@@ -509,5 +514,6 @@
         </div>
       </form>
     </div>
-  </body>
+    </div>
+ </body>
 </html>

@@ -1,27 +1,58 @@
 <?php     //start php tag
 //include connect.php page for database connection
-include('dbConnect.php')
+include ('dbConnect.php');
+
 //if submit is not blanked i.e. it is clicked.
-if (isset($_POST['submit']))
-{
-if($_REQUEST['name']=='' || $_REQUEST['email']=='' || $_REQUEST['password']==''|| $_REQUEST['repassword']=='')
-{
-Echo "please fill the empty field.";
-}
-Else
-{
-$sql="insert into student(name,email,password,repassword) values('".$_REQUEST['name']."', '".$_REQUEST['email']."', '".$_REQUEST['password']."', '".$_REQUEST['repassword']."')";
-$res=mysql_query($sql);
-if($res)
-{
-Echo "Record successfully inserted";
-}
-Else
-{
-Echo "There is some problem in inserting record";
-}
+if (isset($_POST['register'])) {
+    $reg_no='CKPCET'.rand(9,1).time();
+    $surname = mysqli_real_escape_string($con, $_POST['surname']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $fname = mysqli_real_escape_string($con, $_POST['fname']);
+    $mname = mysqli_real_escape_string($con, $_POST['mname']);
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $board = mysqli_real_escape_string($con, $_POST['board']);
+    $category = mysqli_real_escape_string($con, $_POST['category']);
+    $dob = mysqli_real_escape_string($con, $_POST['dob']);
+    $course = mysqli_real_escape_string($con, $_POST['course']);
+    $sname = mysqli_real_escape_string($con, $_POST['schoolname']);
+    $hseatno = mysqli_real_escape_string($con, $_POST['hseatno']);
+    $hpassing = mysqli_real_escape_string($con, $_POST['hpassing']);
+    $gujappno = mysqli_real_escape_string($con, $_POST['gujappno']);
+    $gujseatno = mysqli_real_escape_string($con, $_POST['gujseatno']);
+    $maths= mysqli_real_escape_string($con,(int)$_POST['Maths']);
+    $gujmaths= mysqli_real_escape_string($con,(int)$_POST['Guj_Maths']);
+    $chem= mysqli_real_escape_string($con,(int)$_POST['Chem']);
+    $gujchem= mysqli_real_escape_string($con,(int)$_POST['Guj_Chem']);
+    $phy= mysqli_real_escape_string($con,(int)$_POST['Phy']);
+    $gujphy= mysqli_real_escape_string($con,(int)$_POST['Guj_Phy']);
+    $eng= mysqli_real_escape_string($con,(int)$_POST['Eng']);
+    $chempr= mysqli_real_escape_string($con,(int)$_POST['Chempr']);
+    $aggregate= mysqli_real_escape_string($con,(float)$_POST['aggregate']);
+    $phypr= mysqli_real_escape_string($con,(int)$_POST['Phypr']);
+    $pcm= mysqli_real_escape_string($con,(float)$_POST['pcm']);
+    $comp= mysqli_real_escape_string($con,(int)$_POST['Comp']);
+    $gujper= mysqli_real_escape_string($con,(float)$_POST['gujper']);
+    $comppr= mysqli_real_escape_string($con,(int)$_POST['Comppr']);
+
+    $address = mysqli_real_escape_string($con,$_POST['address']);
+    $pincode = mysqli_real_escape_string($con,$_POST['pincode']);
+    $email = mysqli_real_escape_string($con,$_POST['email']);
+    $smobno = mysqli_real_escape_string($con, $_POST['smobno']);
+    $pmobno = mysqli_real_escape_string($con, $_POST['pmobno']);
+    $check = mysqli_real_escape_string($con, $_POST['check']);
+    
+
+    // database insert SQL code
+    $sql = "INSERT INTO student (studid,surname,name,fname,mname,gender,board,category,dob,course,schoolname,hseatno,hpassing,gujappno,gujseatno,Maths,Guj_Maths,Chem,Guj_Chem,Phy,Guj_Phy,Eng,Chempr,average,Phypr,pcm,Comp,gujper,Comppr,address,pincode,email,smobno,pmobno,declared) VALUES (0,'$surname', '$name', '$fname', '$mname','$gender','$board','$category','$dob','$course','$sname','$hseatno','$hpassing','$gujappno','$gujseatno','$maths','$gujmaths','$chem','$gujchem','$phy','$gujphy','$eng','$chempr','$aggregate','$phypr','$pcm','$comp','$gujper','$comppr','$address','$pincode','$email','$smobno','$pmobno','$check')";
+
+    // insert into database 
+    $rs = mysqli_query($con, $sql);
+
+    if ($rs) {
+        echo '<script language="javascript">';
+        echo 'alert("Successfully Registered"); location.href="generatePDF.php"';
+        echo '</script>';
+    }
 
 }
-}
-
 ?>
