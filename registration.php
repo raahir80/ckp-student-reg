@@ -4,7 +4,7 @@ include ('dbConnect.php');
 
 //if submit is not blanked i.e. it is clicked.
 if (isset($_POST['register'])) {
-    $reg_no='CKPCET'.rand(9,1).time();
+    $regno='CKPCET'.rand(1,999);
     $surname = mysqli_real_escape_string($con, $_POST['surname']);
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $fname = mysqli_real_escape_string($con, $_POST['fname']);
@@ -43,15 +43,16 @@ if (isset($_POST['register'])) {
     
 
     // database insert SQL code
-    $sql = "INSERT INTO student (studid,surname,name,fname,mname,gender,board,category,dob,course,schoolname,hseatno,hpassing,gujappno,gujseatno,Maths,Guj_Maths,Chem,Guj_Chem,Phy,Guj_Phy,Eng,Chempr,average,Phypr,pcm,Comp,gujper,Comppr,address,pincode,email,smobno,pmobno,declared) VALUES (0,'$surname', '$name', '$fname', '$mname','$gender','$board','$category','$dob','$course','$sname','$hseatno','$hpassing','$gujappno','$gujseatno','$maths','$gujmaths','$chem','$gujchem','$phy','$gujphy','$eng','$chempr','$aggregate','$phypr','$pcm','$comp','$gujper','$comppr','$address','$pincode','$email','$smobno','$pmobno','$check')";
+    $sql = "INSERT INTO student (studid,surname,name,fname,mname,gender,board,category,dob,regno,course,schoolname,hseatno,hpassing,gujappno,gujseatno,Maths,Guj_Maths,Chem,Guj_Chem,Phy,Guj_Phy,Eng,Chempr,average,Phypr,pcm,Comp,gujper,Comppr,address,pincode,email,smobno,pmobno,declared) VALUES (0,'$surname', '$name', '$fname', '$mname','$gender','$board','$category','$dob','$regno','$course','$sname','$hseatno','$hpassing','$gujappno','$gujseatno','$maths','$gujmaths','$chem','$gujchem','$phy','$gujphy','$eng','$chempr','$aggregate','$phypr','$pcm','$comp','$gujper','$comppr','$address','$pincode','$email','$smobno','$pmobno','$check')";
 
     // insert into database 
     $rs = mysqli_query($con, $sql);
 
     if ($rs) {
         echo '<script language="javascript">';
-        echo 'alert("Successfully Registered"); location.href="generatePDF.php"';
+        echo 'alert("Successfully Registered");location.href="preview.php"';
         echo '</script>';
+        header("location:generatePDF.php?id=".$regno);
     }
 
 }
