@@ -52,8 +52,7 @@ if (isset($_POST['register'])) {
         echo '<script language="javascript">';
         echo 'alert("Successfully Registered");';
         echo '</script>';
-        header("location:generatePDF.php?id=".$regno);
-       
+       header("location:generatePDF.php?id=".$regno);
     }
 
 }
