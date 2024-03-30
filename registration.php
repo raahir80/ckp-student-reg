@@ -1,3 +1,4 @@
+
 <?php     //start php tag
 //include connect.php page for database connection
 include ('dbConnect.php');
@@ -48,12 +49,14 @@ if (isset($_POST['register'])) {
     // insert into database 
     $rs = mysqli_query($con, $sql);
 
-    if ($rs) {
+    if ($rs) 
+    {   
         echo '<script language="javascript">';
-        echo 'alert("Successfully Registered");';
+        echo "alert('Your Registration Number is:'+'$regno')";
         echo '</script>';
-       header("location:generatePDF.php?id=".$regno);
-    }
+        header("location:generatePDF.php?id=".$regno);
 
+    }
 }
 ?>
+
