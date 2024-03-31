@@ -138,7 +138,7 @@ $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(250,10,'ADDRESS: ',0,0,'L');
 $pdf->SETXY(45,190);
 $pdf->SetFont("Arial", "", 10);
-$pdf->MultiCell(100,5,$row['address']."-".$row['pincode'],0,'L');
+$pdf->MultiCell(100,5,strtolower($row['address'])."-".$row['pincode'],0,'L');
 
 $pdf->Ln(10); 
 $pdf->SETXY(10,200);

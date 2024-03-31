@@ -90,7 +90,7 @@ body {
 }
 
 .wrapper .form .inputfield .input1 {
-  width: 50%;
+  width: 100%;
   outline: none;
   border: 1px solid #fe1e50;
   font-size: 15px;
@@ -211,8 +211,8 @@ body {
 }
 
 .wrapper .form .inputfield .btn {
-  width: 40%;
-  padding: 8px 10px;
+  width: 20%;
+  /*padding: 8px 10px;*/
   font-size: 15px;
   font-weight: bold;
   border: 0px;

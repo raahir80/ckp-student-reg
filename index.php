@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Check if the user is logged in, otherwise redirect to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  header("location: login.php");
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,16 +17,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Registration Form</title>
     <link rel="stylesheet" href="style.css" />
+    
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
       integrity="sha384-1ZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9s+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
+
     <script src="./script.js" type="text/javascript"></script>
+    <style>
+        body{ font: 14px sans-serif; text-align: right; }
+    </style>
   </head>
 
   <body>
+  <h3 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to CKPCET. <label><a href="logout.php" />Logout</a></label></h3>
     <!--div class="wrapperckp">
       C K Pithawala College of Engineering and Technology, SURAT
     </div-->
@@ -244,7 +261,7 @@
               </tr>
 
               <tr>
-                <td><label>MATHEMATICS</label></td>
+                <td><label>MATHSEMATICS</label></td>
                 <td>
                   <input
                     type="text"
@@ -253,6 +270,7 @@
                     maxlength="3"
                   />
                 </td>
+            
                 <td>
                   <input
                     type="text"
@@ -311,7 +329,6 @@
                     maxlength="3"
                   />
                 </td>
-
               </tr>
               <tr>
                 <td><label>CHEMISTRY(Practical)</label></td>
@@ -504,12 +521,11 @@
               type="submit"
               value="Register"
               class="btn" 
-              name="register"
-              
+              name="register"          
             >
               Register
             </button>
-            <button type="reset" value="Reset" class="btn">Reset</button>
+            <button type="reset" value="Reset" class="btn" id="btn-print">Generate PDF</button>
           </div>
         </div>
       </form>
@@ -517,3 +533,4 @@
     </div>
  </body>
 </html>
+

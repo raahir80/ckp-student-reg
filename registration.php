@@ -52,11 +52,12 @@ if (isset($_POST['register'])) {
     if ($rs) 
     {   
         echo '<script language="javascript">';
-        echo "alert('Your Registration Number is:'+'$regno')";
+        //echo "alert('Your Registration Number is:'+'$regno')";
         echo '</script>';
         header("location:generatePDF.php?id=".$regno);
 
     }
 }
 ?>
+
 
