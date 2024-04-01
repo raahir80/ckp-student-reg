@@ -1,13 +1,86 @@
-<?php
-session_start();
+<?php     //start php tag
+//include connect.php page for database connection
+include ('dbConnect.php');
 
-// Check if the user is logged in, otherwise redirect to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-  header("location: login.php");
-  exit;
+
+$read = "SELECT * from student ORDER BY regno DESC LIMIT 1";
+
+$result = mysqli_query($con, $read);
+
+if ($result) {
+    $fetch = mysqli_fetch_assoc($result);
+    $lastregno = $fetch['regno'];
+
+    if ($lastregno == null) {
+        $newregno = "CKPCET0000";
+    } else {
+        $newregno = str_replace("CKPCET", "", $lastregno);
+
+        $newregno = str_pad($newregno+1,4,0,STR_PAD_LEFT);
+        $newregno="CKPCET".$newregno;
+    }
+
+} else {
+    echo "<script>alert('Server down')</script>";
 }
 
+
+//if submit is not blanked i.e. it is clicked.
+if (isset($_POST['register'])) {
+    $regno = mysqli_real_escape_string($con,$_POST['regno']);
+    $surname = mysqli_real_escape_string($con, $_POST['surname']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $fname = mysqli_real_escape_string($con, $_POST['fname']);
+    $mname = mysqli_real_escape_string($con, $_POST['mname']);
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $board = mysqli_real_escape_string($con, $_POST['board']);
+    $category = mysqli_real_escape_string($con, $_POST['category']);
+    $dob = mysqli_real_escape_string($con, $_POST['dob']);
+    $course = mysqli_real_escape_string($con, $_POST['course']);
+    $sname = mysqli_real_escape_string($con, $_POST['schoolname']);
+    $hseatno = mysqli_real_escape_string($con, $_POST['hseatno']);
+    $hpassing = mysqli_real_escape_string($con, $_POST['hpassing']);
+    $gujappno = mysqli_real_escape_string($con, $_POST['gujappno']);
+    $gujseatno = mysqli_real_escape_string($con, $_POST['gujseatno']);
+    $maths = mysqli_real_escape_string($con, (int) $_POST['Maths']);
+    $gujmaths = mysqli_real_escape_string($con, (int) $_POST['Guj_Maths']);
+    $chem = mysqli_real_escape_string($con, (int) $_POST['Chem']);
+    $gujchem = mysqli_real_escape_string($con, (int) $_POST['Guj_Chem']);
+    $phy = mysqli_real_escape_string($con, (int) $_POST['Phy']);
+    $gujphy = mysqli_real_escape_string($con, (int) $_POST['Guj_Phy']);
+    $eng = mysqli_real_escape_string($con, (int) $_POST['Eng']);
+    $chempr = mysqli_real_escape_string($con, (int) $_POST['Chempr']);
+    $aggregate = mysqli_real_escape_string($con, (float) $_POST['aggregate']);
+    $phypr = mysqli_real_escape_string($con, (int) $_POST['Phypr']);
+    $pcm = mysqli_real_escape_string($con, (float) $_POST['pcm']);
+    $comp = mysqli_real_escape_string($con, (int) $_POST['Comp']);
+    $gujper = mysqli_real_escape_string($con, (float) $_POST['gujper']);
+    $comppr = mysqli_real_escape_string($con, (int) $_POST['Comppr']);
+
+    $address = mysqli_real_escape_string($con, $_POST['address']);
+    $pincode = mysqli_real_escape_string($con, $_POST['pincode']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $smobno = mysqli_real_escape_string($con, $_POST['smobno']);
+    $pmobno = mysqli_real_escape_string($con, $_POST['pmobno']);
+    $check = mysqli_real_escape_string($con, $_POST['check']);
+
+
+    // database insert SQL code
+    $sql = "INSERT INTO student (studid,surname,name,fname,mname,gender,board,category,dob,regno,course,schoolname,hseatno,hpassing,gujappno,gujseatno,Maths,Guj_Maths,Chem,Guj_Chem,Phy,Guj_Phy,Eng,Chempr,average,Phypr,pcm,Comp,gujper,Comppr,address,pincode,email,smobno,pmobno,declared) VALUES (0,'$surname', '$name', '$fname', '$mname','$gender','$board','$category','$dob','$regno','$course','$sname','$hseatno','$hpassing','$gujappno','$gujseatno','$maths','$gujmaths','$chem','$gujchem','$phy','$gujphy','$eng','$chempr','$aggregate','$phypr','$pcm','$comp','$gujper','$comppr','$address','$pincode','$email','$smobno','$pmobno','$check')";
+
+    // insert into database 
+    $rs = mysqli_query($con, $sql);
+
+    if ($rs) {
+        echo '<script language="javascript">';
+        echo "alert('Your Registration Number is:'+'$regno')";
+        echo '</script>';
+        header("location:generatePDF.php?id=" . $regno);
+    }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,15 +97,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       integrity="sha384-1ZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9s+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
-
-    <script src="./script.js" type="text/javascript"></script>
-    <style>
-        body{ font: 14px sans-serif; text-align: right; }
-    </style>
   </head>
 
   <body>
-  <h3 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to CKPCET. <label><a href="logout.php" />Logout</a></label></h3>
+  
     <!--div class="wrapperckp">
       C K Pithawala College of Engineering and Technology, SURAT
     </div-->
@@ -41,8 +109,21 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <div class="title" text-align="center">
         <h5>STUDENT REGISTRATION FORM </h5>
       </div>
-      <form method="POST" action="registration.php" data-netlify="true">
+      <form method="POST" action="" data-netlify="true">
         <div class="form">
+
+        <div class="inputfield">
+            <label>Registration No</label>
+            <input
+              type="text"
+              class="input1"
+              id="regno"
+              name="regno"
+              readonly ="readonly"
+              value=<?php echo $newregno;?>  
+              
+            >
+          </div>
           <div class="inputfield">
             <label>Surname</label>
             <input
@@ -109,16 +190,48 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <input type="radio" name="gender" id="radio" value="Female" required />Female
           </div>
 
-          <div class="inputfield" id="board">
+          <!--div class="inputfield" id="board">
             <label for="">Board from which 12th Examination Passed:</label>
             <input type="radio" value="GSEB" id="radio" name="board" checked />
             GSEB
             <input type="radio" value="CBSE" id="radio" name="board" /> CBSE
             <input type="radio" value="ICSE" id="radio" name="board" /> ISCE
             <input type="radio" value="Other" id="radio" name="board" /> Other
+          </div-->
+
+          <div class="inputfield">
+            <label>Board</label>
+            <div class="custom_select">
+              <select id="board" name="board" required>
+                <option value="">--Select your choice--</option>
+                <option value="gen">GSEB</option>
+                <option value="ews">CBSE</option>
+                <option value="sebc">ICSE</option>
+                <option value="sc">Other</option>
+              </select>
+            </div>
           </div>
 
-          <div class="inputfield" id="category">
+
+
+          <div class="inputfield">
+            <label>Category</label>
+            <div class="custom_select">
+              <select id="category" name="category" required>
+                <option value="">--Select your choice--</option>
+                <option value="gen">GEN</option>
+                <option value="ews">EWS</option>
+                <option value="sebc">SEBC</option>
+                <option value="sc">SC</option>
+                <option value="st">ST</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+
+
+          <!--div class="inputfield" id="category">
             <label for="">Category:</label>
             <input
               type="radio"
@@ -135,7 +248,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <input type="radio" value="ST" id="radio" name="category" /> ST
             <input type="radio" value="Other" id="radio" name="category " />
             Other
-          </div>
+          </div-->
 
           <!--div class="inputfield">
           <label for="">Age</label>
@@ -164,7 +277,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             maxlength="100" minlength="8" required>
         </div-->
 
-          <p id="message"></p>
+          <!--p id="message"></p-->
 
           <div class="inputfield">
             <label>Choice of Course</label>
@@ -212,7 +325,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <td>
                       <input
                         type="text"
-                        class="inputgujcet"
+                        class="inputhsc"
                         placeholder="Passing Year"
                         name="hpassing"
                         required
@@ -226,7 +339,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                   <td>
                     <input
                       type="text"
-                      class="inputgujcet"
+                      class="inputhsc"
                       placeholder="GUJCET App No"
                       name="gujappno"
                       required
@@ -236,7 +349,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                   <td>
                     <input
                       type="text"
-                      class="inputgujcet"
+                      class="inputhsc"
                       placeholder="GUJCET Seat No"
                       name="gujseatno"
                       required
@@ -262,7 +375,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </tr>
 
               <tr>
-                <td><label>MATHSEMATICS</label></td>
+                <td><label>MATHEMATICS</label></td>
                 <td>
                   <input
                     type="text"
@@ -349,6 +462,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     type="text"
                     class="inputhsc"
                     name="aggregate"
+                    
                     
                   />
                 </td>

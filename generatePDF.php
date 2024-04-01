@@ -11,14 +11,18 @@ if (mysqli_num_rows($sql)) {
  $row = mysqli_fetch_assoc($sql);
 }
 
+
+
+
 $totalTH = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'];
 $totalTHPR = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'] + $row['Chempr'] + $row['Phypr'] +$row['Comppr'];
+
+$pcm = (float)($row['Maths'] + $row['Chem'] +$row['Phy']+$row['Chempr'] + $row['Phypr'])/400;
+$pmco =(float)($row['Maths'] + $row['Chem'] +$row['Phy'] + $row['Comp'] + $row['Comppr'])/300;
 
 $avg = (float)$totalTH/5;
 
 $pdf = new FPDF('P', 'mm', "A4");
-
-
 
 $pdf->AddPage();
 $pdf->SetFont("Arial", "B", 12);
@@ -35,16 +39,32 @@ $pdf->Cell(190, 20,'Opposite Surat Airport, Behind DPS School, Near Malvan Mandi
 $pdf->Ln(5);
 $pdf->Cell(190, 20,'Dumas Road, Surat - 395007',0,0,'C');
 $pdf->Ln(20);
+
+
+$pdf->SETXY(70,100);
+$pdf->Rect(160,50,30,20);
+$pdf->SETXY(70,100);
+$pdf->SetFont("Arial", "B", 13);
+
+$pdf->Cell(210,-90,"FORM NO",0,0,"C",false);
+$pdf->SETXY(70,100);
+
+$pdf->Cell(210,-70,substr($row['regno'],-3),0,0,"C",false);
+
+$pdf->SETXY(70,100);
 $pdf->SetFont("Arial", "BIU", 15);
-$pdf->Cell(200, 20,'Student Registration Details',0,0,'C');
-
-$pdf->Ln(20);
+$pdf->Cell(70, -90,'Student Registration Details',0,0,'C');
+//$pdf->Ln(20);
 $pdf->SetFont("Arial", "B", 12);
-$pdf->setFillColor(230,230,230);
-$pdf->Cell(190,10,'REGISTRATION NUMBER: '.$row['regno'],1,1,'C',true);
+//$pdf->setFillColor(230,230,230);
 
+$pdf->Cell(-70,-70,'REGISTRATION NUMBER: '.$row['regno'],0,0,'C',false);
+//$pdf->SETXY(150,50);
+//$pdf->Cell(40, 30,'FORM NO',0,1,'C');
+
+$pdf->SETXY(10,100);
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'FULL NAME: ',0,0,'L'); 
+$pdf->Cell(230,-50,'FULL NAME: ',0,0,'L'); 
 $pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,70);
 $pdf->Cell(250,10,strtoupper($row['surname']) ." ".strtoupper($row['name'])." ".strtoupper($row['fname']),0,0,'L'); 
@@ -177,94 +197,118 @@ $pdf->Cell(40,-10,"PHOTO",0,0,"C",false);
 
 
 
-$pdf->Rect(115,130,45,50);
+$pdf->Rect(115,125,45,50);
 $pdf->SetFont("Arial", "BI", 12);
-$pdf->SETXY(125,130);
+$pdf->SETXY(125,120);
 $pdf->Cell(10,5,'12th RESULT',0,0,'L');
 
 
 $pdf->SetFont("Arial", "", 10);
-$pdf->SETXY(115,130);
+$pdf->SETXY(115,120);
 $pdf->Cell(10,20,'ENGLISH  ',0,0,'L');
-$pdf->SETXY(150,130);
+$pdf->SETXY(150,120);
 $pdf->Cell(10,20,$row['Eng'],0,0,'L');
 
 
 
-$pdf->SETXY(115,135);
+$pdf->SETXY(115,125);
 $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
-$pdf->SETXY(150,135);
+$pdf->SETXY(150,125);
 $pdf->Cell(10,20,$row['Maths'],0,0,'L');
 
 
-$pdf->SETXY(115,140);
+$pdf->SETXY(115,130);
 $pdf->Cell(10,20,'CHEMISTRY(TH)  ',0,0,'L');
-$pdf->SETXY(150,140);
+$pdf->SETXY(150,130);
 $pdf->Cell(10,20,$row['Chem'],0,0,'L');
 
 
-$pdf->SETXY(115,145);
+$pdf->SETXY(115,135);
 $pdf->Cell(10,20,'CHEMISTRY(PR)  ',0,0,'L');
-$pdf->SETXY(150,145);
+$pdf->SETXY(150,135);
 $pdf->Cell(10,20,$row['Chempr'],0,0,'L');
 
 
 
-$pdf->SETXY(115,150);
+$pdf->SETXY(115,140);
 $pdf->Cell(10,20,'PHYSICS(TH)  ',0,0,'L');
-$pdf->SETXY(150,150);
+$pdf->SETXY(150,140);
 $pdf->Cell(10,20,$row['Phy'],0,0,'L');
 
 
-$pdf->SETXY(115,155);
+$pdf->SETXY(115,145);
 $pdf->Cell(10,20,'PHYSICS(PR)  ',0,0,'L');
-$pdf->SETXY(150,155);
+$pdf->SETXY(150,145);
 $pdf->Cell(10,20,$row['Phypr'],0,0,'L');
 
 
 
-$pdf->SETXY(115,160);
+$pdf->SETXY(115,150);
 $pdf->Cell(10,20,'COMPUTER  ',0,0,'L');
-$pdf->SETXY(150,160);
+$pdf->SETXY(150,150);
 $pdf->Cell(10,20,$row['Comp'],0,0,'L');
 
 
 
-$pdf->SETXY(115,165);
+$pdf->SETXY(115,155);
 $pdf->Cell(10,20,'COMPUTER(PR)  ',0,0,'L');
-$pdf->SETXY(150,165);
+$pdf->SETXY(150,155);
 $pdf->Cell(10,20,$row['Comppr'],0,0,'L');
 
 
-$pdf->Rect(115,180,55,8);
-$pdf->SETXY(115,175 );
+$pdf->SetFont("Arial", "B", 10);
+
+$pdf->Rect(115,175,45,8);
+$pdf->SETXY(115,170);
 $pdf->Cell(10,20,'TOTAL ',0,0,'L');
-$pdf->SETXY(150,175);
-$pdf->Cell(10,20,$totalTH." / "."500",0,0,'L');
+$pdf->SETXY(150,170);
+$pdf->Cell(10,20,$totalTH,0,0,'L');
 
 
 
-$pdf->Rect(160,130,45,30);
+$pdf->Rect(160,125,45,30);
 
 $pdf->SetFont("Arial", "BI", 12);
-$pdf->SETXY(165,130);
+$pdf->SETXY(165,120);
 $pdf->Cell(10,5,'GUJCET RESULT',0,0,'L');
 
 $pdf->SetFont("Arial", "", 10);
-$pdf->SETXY(160,130);
+$pdf->SETXY(160,120);
 $pdf->Cell(10,20,'PHYSICS  ',0,0,'L');
-$pdf->SETXY(195,130);
+$pdf->SETXY(195,120);
 $pdf->Cell(15,20,$row['Guj_Phy'],0,0,'L');
 
-$pdf->SETXY(160,135);
+$pdf->SETXY(160,125);
 $pdf->Cell(10,20,'CHEMISTRY  ',0,0,'L');
-$pdf->SETXY(195,135);
+$pdf->SETXY(195,125);
 $pdf->Cell(15,20,$row['Guj_Chem'],0,0,'L');
 
-$pdf->SETXY(160,140);
+$pdf->SETXY(160,130);
 $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
-$pdf->SETXY(195,140);
+$pdf->SETXY(195,130);
 $pdf->Cell(15,20,$row['Guj_Maths'],0,0,'L');
+
+
+$pdf->SETXY(110,200);
+$pdf->Rect(160,165,40,8);
+$pdf->SETXY(120,119);
+$pdf->SetFont("Arial", "B", 12);
+$pdf->Cell(100,100,"PCM",0,0,"C",false);
+$pdf->SETXY(180,167);
+$pdf->SetFont("Arial", "", 12);
+$pdf->Cell(10,5,$pcm,0,0,'R');
+
+
+$pdf->SETXY(110,200);
+$pdf->Rect(160,175,40,8);
+$pdf->SETXY(120,129);
+$pdf->SetFont("Arial", "B", 12);
+$pdf->Cell(100,100,"PMCO",0,0,"C",false);
+$pdf->SETXY(180,177);
+$pdf->SetFont("Arial", "", 12);
+$pdf->Cell(10,5,$pmco,0,0,'R');
+
+
 
 $pdf->Rect(115,210,50,10);
 $pdf->SetFont("Arial", "B", 12);
@@ -282,7 +326,7 @@ $pdf->SetFont("Arial", "B", 12);
 $pdf->SETXY(115,222);
 $pdf->Cell(10,5,'PCM Percentile',0,0,'L');
 $pdf->SETXY(175,222);
-$pdf->Cell(10,5,$avg,0,0,'R');
+$pdf->Cell(10,5,$row['pcm'],0,0,'R');
 
 $pdf->Rect(170,220,25,10);
 
@@ -292,7 +336,7 @@ $pdf->SetFont("Arial", "B", 12);
 $pdf->SETXY(115,232);
 $pdf->Cell(10,5,'GUJCET Percentile',0,0,'L');
 $pdf->SETXY(175,232);
-$pdf->Cell(10,5,$avg,0,0,'R');
+$pdf->Cell(10,5,$row['gujper'],0,0,'R');
 
 $pdf->Rect(170,230,25,10);
 
