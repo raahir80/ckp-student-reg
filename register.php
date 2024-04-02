@@ -120,7 +120,7 @@ if (isset($_POST['register'])) {
               id="regno"
               name="regno"
               readonly ="readonly"
-              value=<?php echo $newregno;?>  
+              placeholder=<?php echo $newregno;?>  
               
             >
           </div>
