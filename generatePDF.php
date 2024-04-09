@@ -217,94 +217,197 @@ $pdf->SETXY(125,120);
 $pdf->Cell(10,5,'12th RESULT',0,0,'L');
 
 
-$pdf->SetFont("Arial", "", 10);
-$pdf->SETXY(115,120);
-$pdf->Cell(10,20,'ENGLISH  ',0,0,'L');
-$pdf->SETXY(150,120);
-$pdf->Cell(10,20,$row['Eng'],0,0,'L');
+if($row['Eng'] == 0)
+{
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->SETXY(115,120);
+    $pdf->Cell(10,20,'ENGLISH  ',0,0,'L');
+    $pdf->SETXY(150,120);
+    $pdf->Cell(10,20,"--",0,0,'L');
+}else{
+        $pdf->SetFont("Arial", "", 10);
+    $pdf->SETXY(115,120);
+    $pdf->Cell(10,20,'ENGLISH  ',0,0,'L');
+    $pdf->SETXY(150,120);
+    $pdf->Cell(10,20,$row['Eng'],0,0,'L');  
+}
 
 
 
-$pdf->SETXY(115,125);
-$pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
-$pdf->SETXY(150,125);
-$pdf->Cell(10,20,$row['Maths'],0,0,'L');
+if($row['Maths'] == 0){
+    $pdf->SETXY(115,125);
+    $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
+    $pdf->SETXY(150,125);
+    $pdf->Cell(10,20,"--",0,0,'L');
+
+}else{
+    $pdf->SETXY(115,125);
+    $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
+    $pdf->SETXY(150,125);
+    $pdf->Cell(10,20,$row['Maths'],0,0,'L');
+
+}
 
 
-$pdf->SETXY(115,130);
-$pdf->Cell(10,20,'CHEMISTRY(TH)  ',0,0,'L');
-$pdf->SETXY(150,130);
-$pdf->Cell(10,20,$row['Chem'],0,0,'L');
+if($row['Chem'] == 0){
+    $pdf->SETXY(115,130);
+    $pdf->Cell(10,20,'CHEMISTRY(TH)  ',0,0,'L');
+    $pdf->SETXY(150,130);
+    $pdf->Cell(10,20,"--",0,0,'L');
+
+}else{
+    $pdf->SETXY(115,130);
+    $pdf->Cell(10,20,'CHEMISTRY(TH)  ',0,0,'L');
+    $pdf->SETXY(150,130);
+    $pdf->Cell(10,20,$row['Chem'],0,0,'L');
+}
 
 
-$pdf->SETXY(115,135);
-$pdf->Cell(10,20,'CHEMISTRY(PR)  ',0,0,'L');
-$pdf->SETXY(150,135);
-$pdf->Cell(10,20,$row['Chempr'],0,0,'L');
+if($row['Chempr'] == 0){
+    $pdf->SETXY(115,135);
+    $pdf->Cell(10,20,'CHEMISTRY(PR)  ',0,0,'L');
+    $pdf->SETXY(150,135);
+    $pdf->Cell(10,20,"--",0,0,'L');
 
-
-
-$pdf->SETXY(115,140);
-$pdf->Cell(10,20,'PHYSICS(TH)  ',0,0,'L');
-$pdf->SETXY(150,140);
-$pdf->Cell(10,20,$row['Phy'],0,0,'L');
-
-
-$pdf->SETXY(115,145);
-$pdf->Cell(10,20,'PHYSICS(PR)  ',0,0,'L');
-$pdf->SETXY(150,145);
-$pdf->Cell(10,20,$row['Phypr'],0,0,'L');
-
-
-
-$pdf->SETXY(115,150);
-$pdf->Cell(10,20,'COMPUTER  ',0,0,'L');
-$pdf->SETXY(150,150);
-$pdf->Cell(10,20,$row['Comp'],0,0,'L');
+}else{
+    $pdf->SETXY(115,135);
+    $pdf->Cell(10,20,'CHEMISTRY(PR)  ',0,0,'L');
+    $pdf->SETXY(150,135);
+    $pdf->Cell(10,20,$row['Chempr'],0,0,'L');
+}
 
 
 
-$pdf->SETXY(115,155);
-$pdf->Cell(10,20,'COMPUTER(PR)  ',0,0,'L');
-$pdf->SETXY(150,155);
-$pdf->Cell(10,20,$row['Comppr'],0,0,'L');
+if($row['Phy'] == 0){
+    $pdf->SETXY(115,140);
+    $pdf->Cell(10,20,'PHYSICS(TH)  ',0,0,'L');
+    $pdf->SETXY(150,140);
+    $pdf->Cell(10,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(115,140);
+    $pdf->Cell(10,20,'PHYSICS(TH)  ',0,0,'L');
+    $pdf->SETXY(150,140);
+    $pdf->Cell(10,20,$row['Phy'],0,0,'L');
+}
+
+if($row['Phypr'] == 0){
+    $pdf->SETXY(115,145);
+    $pdf->Cell(10,20,'PHYSICS(PR)  ',0,0,'L');
+    $pdf->SETXY(150,145);
+    $pdf->Cell(10,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(115,145);
+    $pdf->Cell(10,20,'PHYSICS(PR)  ',0,0,'L');
+    $pdf->SETXY(150,145);
+    $pdf->Cell(10,20,$row['Phypr'],0,0,'L');
+}
+
+
+
+if($row['Comp'] == 0){
+    $pdf->SETXY(115,150);
+    $pdf->Cell(10,20,'COMPUTER  ',0,0,'L');
+    $pdf->SETXY(150,150);
+    $pdf->Cell(10,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(115,150);
+    $pdf->Cell(10,20,'COMPUTER  ',0,0,'L');
+    $pdf->SETXY(150,150);
+    $pdf->Cell(10,20,$row['Comp'],0,0,'L');
+}
+
+
+if($row['Comppr'] == 0){
+    $pdf->SETXY(115,155);
+    $pdf->Cell(10,20,'COMPUTER(PR)  ',0,0,'L');
+    $pdf->SETXY(150,155);
+    $pdf->Cell(10,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(115,155);
+    $pdf->Cell(10,20,'COMPUTER(PR)  ',0,0,'L');
+    $pdf->SETXY(150,155);
+    $pdf->Cell(10,20,$row['Comppr'],0,0,'L');
+}
+
+
+
+
 
 
 $pdf->SetFont("Arial", "B", 10);
-
 $pdf->Rect(115,175,45,8);
-$pdf->SETXY(115,170);
-$pdf->Cell(10,20,'TOTAL ',0,0,'L');
-$pdf->SETXY(150,170);
-$pdf->Cell(10,20,$totalTH,0,0,'L');
+
+if($totalTH == 0){
+    $pdf->SETXY(115,170);
+    $pdf->Cell(10,20,'TOTAL ',0,0,'L');
+    $pdf->SETXY(150,170);
+    $pdf->Cell(10,20,"--",0,0,'L');
+
+}else{
+    $pdf->SETXY(115,170);
+    $pdf->Cell(10,20,'TOTAL ',0,0,'L');
+    $pdf->SETXY(150,170);
+    $pdf->Cell(10,20,$totalTH,0,0,'L');
+}
+
 
 
 
 $pdf->Rect(160,125,45,30);
 
+
 $pdf->SetFont("Arial", "BI", 12);
 $pdf->SETXY(165,120);
 $pdf->Cell(10,5,'GUJCET RESULT',0,0,'L');
 
-$pdf->SetFont("Arial", "", 10);
-$pdf->SETXY(160,120);
-$pdf->Cell(10,20,'PHYSICS  ',0,0,'L');
-$pdf->SETXY(195,120);
-$pdf->Cell(15,20,$row['Guj_Phy'],0,0,'L');
 
-$pdf->SETXY(160,125);
-$pdf->Cell(10,20,'CHEMISTRY  ',0,0,'L');
-$pdf->SETXY(195,125);
-$pdf->Cell(15,20,$row['Guj_Chem'],0,0,'L');
+if($row['Guj_Phy'] == 0){
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->SETXY(160,120);
+    $pdf->Cell(10,20,'PHYSICS  ',0,0,'L');
+    $pdf->SETXY(195,120);
+    $pdf->Cell(15,20,"--",0,0,'L');
+    
+}else{
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->SETXY(160,120);
+    $pdf->Cell(10,20,'PHYSICS  ',0,0,'L');
+    $pdf->SETXY(195,120);
+    $pdf->Cell(15,20,$row['Guj_Phy'],0,0,'L');
+}
 
-$pdf->SETXY(160,130);
-$pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
-$pdf->SETXY(195,130);
-$pdf->Cell(15,20,$row['Guj_Maths'],0,0,'L');
+
+if($row['Guj_Chem'] == 0){
+    $pdf->SETXY(160,125);
+    $pdf->Cell(10,20,'CHEMISTRY  ',0,0,'L');
+    $pdf->SETXY(195,125);
+    $pdf->Cell(15,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(160,125);
+    $pdf->Cell(10,20,'CHEMISTRY  ',0,0,'L');
+    $pdf->SETXY(195,125);
+    $pdf->Cell(15,20,$row['Guj_Chem'],0,0,'L');
+}
+
+
+if($row['Guj_Maths'] == 0){
+    $pdf->SETXY(160,130);
+    $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
+    $pdf->SETXY(195,130);
+    $pdf->Cell(15,20,"--",0,0,'L');
+}else{
+    $pdf->SETXY(160,130);
+    $pdf->Cell(10,20,'MATHEMATICS  ',0,0,'L');
+    $pdf->SETXY(195,130);
+    $pdf->Cell(15,20,$row['Guj_Maths'],0,0,'L');
+}
+
 
 
 $pdf->SETXY(110,200);
 $pdf->Rect(160,165,40,8);
+
+
 $pdf->SETXY(120,119);
 $pdf->SetFont("Arial", "B", 12);
 $pdf->Cell(100,100,"PCM",0,0,"C",false);
@@ -358,24 +461,29 @@ $pdf->Rect(170,230,25,10);
 $pdf->SetFont("Arial", "B", 10);
 $pdf->SETXY(10,200);
 $pdf->Cell(250,10,'ACPC Merit No : ',0,0,'L');
+$pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,202);
 $pdf->Cell(10,5,$row['acpcmeritno'],0,0,'L');
 
+$pdf->SetFont("Arial", "B", 10);
 $pdf->SETXY(10,210);
 $pdf->Cell(250,10,'ACPC Merit Marks : ',0,0,'L');
+$pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,212);
 $pdf->Cell(10,5,$row['acpcmeritmarks'],0,0,'L');
 
 
-
+$pdf->SetFont("Arial", "B", 10);
 $pdf->SETXY(10,220);
 $pdf->Cell(250,10,'ACPC App No : ',0,0,'L');
+$pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,222);
 $pdf->Cell(10,5,$row['acpcappno'],0,0,'L');
 
-
+$pdf->SetFont("Arial", "B", 10);
 $pdf->SETXY(10,230);
 $pdf->Cell(250,10,'Aadhar Card No : ',0,0,'L');
+$pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,232);
 $pdf->Cell(10,5,$row['aadhar'],0,0,'L   ');
 

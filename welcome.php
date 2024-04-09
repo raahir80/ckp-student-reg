@@ -29,14 +29,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="wrapper">
         <h2 class="my-5">Hi,. Welcome to CKPCET.</h2>
         <p>
-            <a href="search.php" class="btn btn-primary custom ml-3 ">Search Record</a>
-            <a href="register.php" class="btn btn-primary custom ml-3 ">Student Registration</a>
+            <a href="diploma.php" class="btn btn-primary ml-3 ">Diploma Inquiry Form</a>
+            <a href="degree.php" class="btn btn-primary ml-3 ">Degree Inquiry Form</a>    
+        </p>   
+        <p>   
+            <a href="display.php" class="btn btn-primary ml-3">Display Records</a>
+
         </p>
-        <p>
-               
-            <a href="display.php" class="btn btn-primary custom ml-3">Display Records</a>
-        </p>
-        </p>
+        
     </div>
 </body>
 </html>

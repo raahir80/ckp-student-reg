@@ -30,7 +30,7 @@ include("dbConnect.php");
           </div>  
         </div>
       </div>
-    </div>
+    </div>  
   </div>
   <a href= "welcome.php" class="btn btn-primary">Go Back</a>
       <div class="card-mt-4">
