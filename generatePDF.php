@@ -13,7 +13,6 @@ if (mysqli_num_rows($sql)) {
 
 
 
-
 $totalTH = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'];
 $totalTHPR = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'] + $row['Chempr'] + $row['Phypr'] +$row['Comppr'];
 
@@ -51,6 +50,20 @@ $pdf->SETXY(70,100);
 
 $pdf->Cell(210,-70,substr($row['regno'],-3),0,0,"C",false);
 
+
+$pdf->Ln(10); 
+$pdf->Rect(10,50,30,20);
+
+$pdf->SetFont("Arial", "B", 12);
+$pdf->SETXY(15,110);
+$pdf->Cell(250,-110,'COURSE',0,0,'L');
+$pdf->SETXY(12,60);
+$pdf->SetFont("Arial", "B", 12);
+$pdf->Cell(250,10,strtoupper($row['course']),0,0,'L');
+
+
+
+
 $pdf->SETXY(70,100);
 $pdf->SetFont("Arial", "BIU", 15);
 $pdf->Cell(70, -90,'Student Registration Details',0,0,'C');
@@ -58,65 +71,63 @@ $pdf->Cell(70, -90,'Student Registration Details',0,0,'C');
 $pdf->SetFont("Arial", "B", 12);
 //$pdf->setFillColor(230,230,230);
 
-$pdf->Cell(-70,-70,'REGISTRATION NUMBER: '.$row['regno'],0,0,'C',false);
+$pdf->Cell(-70,-70,'REGISTRATION NUMBER : '.$row['regno'],0,0,'C',false);
 //$pdf->SETXY(150,50);
 //$pdf->Cell(40, 30,'FORM NO',0,1,'C');
 
 $pdf->SETXY(10,100);
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(230,-50,'FULL NAME: ',0,0,'L'); 
+$pdf->Cell(230,-50,'FULL NAME : ',0,0,'L'); 
 $pdf->SetFont("Arial", "", 10);
 $pdf->SETXY(45,70);
 $pdf->Cell(250,10,strtoupper($row['surname']) ." ".strtoupper($row['name'])." ".strtoupper($row['fname']),0,0,'L'); 
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'MOTHERS NAME: ',0,0,'L');
+$pdf->Cell(250,10,'MOTHERS NAME : ',0,0,'L');
 $pdf->SETXY(45,80);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,strtoupper($row['mname']),0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'GENDER: ',0,0,'L');
+$pdf->Cell(250,10,'GENDER : ',0,0,'L');
 $pdf->SETXY(45,90);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,strtoupper($row['gender']),0,0,'L');
 
+$pdf->SetFont("Arial", "B", 10);
+$pdf->SETXY(80,90);
+$pdf->Cell(250,10,'DOB : ',0,0,'L');
+$pdf->SETXY(90,90);
+$pdf->SetFont("Arial", "", 10);
+$pdf->Cell(250,10,date('d/m/o',strtotime($row['dob'])),0,0,'L');
+
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'BOARD: ',0,0,'L');
+$pdf->Cell(250,10,'BOARD : ',0,0,'L');
 $pdf->SETXY(45,100);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,strtoupper($row['board']),0,0,'L');
 
 
-$pdf->Ln(10); 
+//$pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'CATEGORY: ',0,0,'L');
-$pdf->SETXY(45,110);
+$pdf->SETXY(80,100);
+$pdf->Cell(250,10,'CATEGORY : ',0,0,'L');
+$pdf->SETXY(105,100);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,strtoupper($row['category']),0,0,'L');
 
-$pdf->Ln(10); 
-$pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'DOB: ',0,0,'L');
-$pdf->SETXY(45,120);
-$pdf->SetFont("Arial", "", 10);
-$pdf->Cell(250,10,date('d/m/o',strtotime($row['dob'])),0,0,'L');
+//$pdf->Ln(10); 
+
+
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'COURSE: ',0,0,'L');
-$pdf->SETXY(45,130);
-$pdf->SetFont("Arial", "", 10);
-$pdf->Cell(250,10,strtoupper($row['course']),0,0,'L');
-
-$pdf->Ln(10); 
-$pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'SCHOOL NAME: ',0,0,'L');
-$pdf->SETXY(45,140);
+$pdf->Cell(250,10,'SCHOOL NAME : ',0,0,'L');
+$pdf->SETXY(45,112);
 $pdf->SetFont("Arial", "", 10);
 //$pdf->Cell(250,10,strtoupper($row['schoolname']),0,0,'L');
 
@@ -125,9 +136,9 @@ $pdf->MultiCell(80,5,strtoupper($row['schoolname']),0,'L');
 
 //$pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->SETXY(10,150);
-$pdf->Cell(250,10,'H.S.C Seat No: ',0,0,'L');
-$pdf->SETXY(45,150);
+$pdf->SETXY(10,120);
+$pdf->Cell(250,10,'H.S.C Seat No : ',0,0,'L');
+$pdf->SETXY(45,120);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['hseatno'],0,0,'L');
 
@@ -135,55 +146,58 @@ $pdf->Cell(250,10,$row['hseatno'],0,0,'L');
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(250,10,'H.S.C passing Year: ',0,0,'L');
-$pdf->SETXY(45,160);
+$pdf->SETXY(45,130);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['hpassing'],0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'GUJCET Appl No: ',0,0,'L');
-$pdf->SETXY(45,170);
+$pdf->Cell(250,10,'GUJCET Appl No : ',0,0,'L');
+$pdf->SETXY(45,140);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['gujappno'],0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'GUJCET Seat No: ',0,0,'L');
-$pdf->SETXY(45,180);
+$pdf->SETXY(10,150);
+$pdf->Cell(250,10,'GUJCET Seat No : ',0,0,'L');
+$pdf->SETXY(45,150);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['gujseatno'],0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'ADDRESS: ',0,0,'L');
-$pdf->SETXY(45,190);
+$pdf->Cell(250,10,'ADDRESS : ',0,0,'L');
+$pdf->SETXY(45,160);
 $pdf->SetFont("Arial", "", 10);
-$pdf->MultiCell(100,5,strtolower($row['address'])."-".$row['pincode'],0,'L');
+$pdf->MultiCell(75,5,strtolower($row['address'])."-".$row['pincode'],0,'L');
 
 $pdf->Ln(10); 
-$pdf->SETXY(10,200);
+$pdf->SETXY(10,170);
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'Email: ',0,0,'L');
-$pdf->SETXY(45,200);
+$pdf->Cell(250,10,'Email : ',0,0,'L');
+$pdf->SETXY(45,170);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['email'],0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'Student Mobile No: ',0,0,'L');
-$pdf->SETXY(45,210);
+$pdf->Cell(250,10,'Student Mobile No : ',0,0,'L');
+$pdf->SETXY(45,180);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['smobno'],0,0,'L');
 
 $pdf->Ln(10); 
 $pdf->SetFont("Arial", "B", 10);
-$pdf->Cell(250,10,'Parents Mobile No: ',0,0,'L');
-$pdf->SETXY(45,220);
+$pdf->Cell(250,10,'Parents Mobile No : ',0,0,'L');
+$pdf->SETXY(45,190);
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(250,10,$row['pmobno'],0,0,'L');
 
 
-$pdf->Ln(36); 
+//$pdf->Ln(36); 
+$pdf->SETXY(15,255);
+
 $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(10,0,'Declaration: ',0,0,'L',false);
 $pdf->Cell(10,20,'I hereby declare that the above information provided is true and correct.',0,0,'L',false);
@@ -295,7 +309,7 @@ $pdf->SETXY(120,119);
 $pdf->SetFont("Arial", "B", 12);
 $pdf->Cell(100,100,"PCM",0,0,"C",false);
 $pdf->SETXY(180,167);
-$pdf->SetFont("Arial", "", 12);
+$pdf->SetFont("Arial", "", 10);
 $pdf->Cell(10,5,$pcm,0,0,'R');
 
 
@@ -305,7 +319,7 @@ $pdf->SETXY(120,129);
 $pdf->SetFont("Arial", "B", 12);
 $pdf->Cell(100,100,"PMCO",0,0,"C",false);
 $pdf->SETXY(180,177);
-$pdf->SetFont("Arial", "", 12);
+$pdf->SetFont("Arial", "", 10);
 $pdf->Cell(10,5,$pmco,0,0,'R');
 
 
@@ -339,6 +353,33 @@ $pdf->SETXY(175,232);
 $pdf->Cell(10,5,$row['gujper'],0,0,'R');
 
 $pdf->Rect(170,230,25,10);
+
+
+$pdf->SetFont("Arial", "B", 10);
+$pdf->SETXY(10,200);
+$pdf->Cell(250,10,'ACPC Merit No : ',0,0,'L');
+$pdf->SETXY(45,202);
+$pdf->Cell(10,5,$row['acpcmeritno'],0,0,'L');
+
+$pdf->SETXY(10,210);
+$pdf->Cell(250,10,'ACPC Merit Marks : ',0,0,'L');
+$pdf->SETXY(45,212);
+$pdf->Cell(10,5,$row['acpcmeritmarks'],0,0,'L');
+
+
+
+$pdf->SETXY(10,220);
+$pdf->Cell(250,10,'ACPC App No : ',0,0,'L');
+$pdf->SETXY(45,222);
+$pdf->Cell(10,5,$row['acpcappno'],0,0,'L');
+
+
+$pdf->SETXY(10,230);
+$pdf->Cell(250,10,'Aadhar Card No : ',0,0,'L');
+$pdf->SETXY(45,232);
+$pdf->Cell(10,5,$row['aadhar'],0,0,'L   ');
+
+
 
 
 

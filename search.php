@@ -2,20 +2,13 @@
 include("dbConnect.php");
 
 
+$fetchData = mysqli_query($con, "select * from student");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap4.min.css" rel="stylesheet">
- 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap4.min.js"></script>
 </head>
-
 <body>
 <div class="container">
   <div class="row">
@@ -23,21 +16,28 @@ include("dbConnect.php");
       <div class="card mt-4">
         <div class="card-body">
           <div class="card-header">
-                <div class="col-md-12">
-                  <h2 align="center"><b>CKPCET STUDENT INQUIRY DETAILS</b></h2>
+              
+                <div class="col-md-5">
+                  <h4>STUDENT DETAILS</h4>
+                  <form action="" method ="GET">
+                    <div class="input group mb-1">
+                        <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>" class="form-control" placeholder="search data"/>
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
                 </div>
+              
             </div> 
           </div>  
         </div>
       </div>
     </div>
   </div>
-  <a href= "welcome.php" class="btn btn-primary">Go Back</a>
       <div class="card-mt-4">
         <div class="card-body">
-          <table id="table" class=" table table-bordered table-striped text-center">
+          <table class=" table table-bordered table-striped">
             <thead>
-              <tr class="bg-dark text-white">
+              <tr>
                 <th>Sr.No</th>
                 <th>Registration no</th>
                 <th>Full Name</th>
@@ -59,8 +59,10 @@ include("dbConnect.php");
             </thead>
             <tbody>
               <?php
-                
-                  $query = "SELECT  * FROM student";
+                if(isset($_GET['search']))
+                {
+                  $data = $_GET['search'];
+                  $query = "SELECT  * FROM student WHERE CONCAT(regno,surname,name,fname,mname) LIKE '%$data%' ";
                   $query_run= mysqli_query($con,$query);
                   if(mysqli_num_rows($query_run)>0){
                     foreach($query_run as $items){
@@ -94,7 +96,7 @@ include("dbConnect.php");
                     </tr>
                     <?php
                   }
-                
+                }
               ?>
             </tbody>
           </table>
@@ -104,13 +106,5 @@ include("dbConnect.php");
       </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $('table').DataTable({
-      ordering:false
-    });
-  })
-</script>
 </body>
-
 </html>
