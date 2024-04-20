@@ -33,7 +33,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <a href="degree.php" class="btn btn-primary ml-3 ">Degree Inquiry Form</a>    
         </p>   
         <p>   
-            <a href="display.php" class="btn btn-primary ml-3">Display Records</a>
+            <a href="display.php" class="btn btn-primary ml-3">DEGREE Records</a>
+            <a href="diplomadisplay.php" class="btn btn-primary ml-3">D2D Records</a>
 
         </p>
         

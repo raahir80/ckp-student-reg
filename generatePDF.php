@@ -17,7 +17,7 @@ $totalTH = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'];
 $totalTHPR = $row['Maths'] + $row['Chem'] +$row['Phy'] +$row['Comp'] +$row['Eng'] + $row['Chempr'] + $row['Phypr'] +$row['Comppr'];
 
 $pcm = (float)($row['Maths'] + $row['Chem'] +$row['Phy']+$row['Chempr'] + $row['Phypr'])/400;
-$pmco =(float)($row['Maths'] + $row['Chem'] +$row['Phy'] + $row['Comp'] + $row['Comppr'])/300;
+$pmco =round((float)($row['Maths'] + $row['Chem'] +$row['Phy'] + $row['Comp'] + $row['Comppr'])/300,2);
 
 $avg = (float)$totalTH/5;
 
@@ -39,6 +39,8 @@ $pdf->Ln(5);
 $pdf->Cell(190, 20,'Dumas Road, Surat - 395007',0,0,'C');
 $pdf->Ln(20);
 
+$pdf->Line(20, 45, 210-20, 45); // 20mm from each edge
+$pdf->Line(50, 45, 210-50, 45);
 
 $pdf->SETXY(70,100);
 $pdf->Rect(160,50,30,20);

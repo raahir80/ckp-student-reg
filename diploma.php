@@ -3,7 +3,7 @@
 include ('dbConnect.php');
 
 
-$read = "SELECT * from student ORDER BY regno DESC LIMIT 1";
+$read = "SELECT * from dipstudent ORDER BY regno DESC LIMIT 1";
 
 $result = mysqli_query($con, $read);
 
@@ -12,12 +12,12 @@ if ($result) {
   $lastregno = $fetch['regno'];
 
   if ($lastregno == null) {
-    $newregno = "CKPCET0001";
+    $newregno = "CKPCETD2D0001";
   } else {
-    $newregno = str_replace("CKPCET", "", $lastregno);
+    $newregno = str_replace("CKPCETD2D", "", $lastregno);
 
     $newregno = str_pad($newregno + 1, 4, 0, STR_PAD_LEFT);
-    $newregno = "CKPCET" . $newregno;
+    $newregno = "CKPCETD2D" . $newregno;
   }
 
 } else {
@@ -34,29 +34,38 @@ if (isset($_POST['register'])) {
   $fname = mysqli_real_escape_string($con, $_POST['fname']);
   $mname = mysqli_real_escape_string($con, $_POST['mname']);
   $gender = mysqli_real_escape_string($con, $_POST['gender']);
-  $board = mysqli_real_escape_string($con, $_POST['board']);
+  $university = mysqli_real_escape_string($con, $_POST['uname']);
   $category = mysqli_real_escape_string($con, $_POST['category']);
   $dob = mysqli_real_escape_string($con, $_POST['dob']);
   $course = mysqli_real_escape_string($con, $_POST['course']);
-  $sname = mysqli_real_escape_string($con, $_POST['schoolname']);
-  $hseatno = mysqli_real_escape_string($con, $_POST['hseatno']);
-  $hpassing = mysqli_real_escape_string($con, $_POST['hpassing']);
-  $gujappno = mysqli_real_escape_string($con, $_POST['gujappno']);
-  $gujseatno = mysqli_real_escape_string($con, $_POST['gujseatno']);
-  $maths = mysqli_real_escape_string($con, (int) $_POST['Maths']);
-  $gujmaths = mysqli_real_escape_string($con, (int) $_POST['Guj_Maths']);
-  $chem = mysqli_real_escape_string($con, (int) $_POST['Chem']);
-  $gujchem = mysqli_real_escape_string($con, (int) $_POST['Guj_Chem']);
-  $phy = mysqli_real_escape_string($con, (int) $_POST['Phy']);
-  $gujphy = mysqli_real_escape_string($con, (int) $_POST['Guj_Phy']);
-  $eng = mysqli_real_escape_string($con, (int) $_POST['Eng']);
-  $chempr = mysqli_real_escape_string($con, (int) $_POST['Chempr']);
-  $aggregate = mysqli_real_escape_string($con, (float) $_POST['aggregate']);
-  $phypr = mysqli_real_escape_string($con, (int) $_POST['Phypr']);
-  $pcm = mysqli_real_escape_string($con, (float) $_POST['pcm']);
-  $comp = mysqli_real_escape_string($con, (int) $_POST['Comp']);
-  $gujper = mysqli_real_escape_string($con, (float) $_POST['gujper']);
-  $comppr = mysqli_real_escape_string($con, (int) $_POST['Comppr']);
+  $collegename = mysqli_real_escape_string($con, $_POST['collegename']);
+
+  $cpi1 = mysqli_real_escape_string($con, (int) $_POST['cpi1']);
+  $cpi2 = mysqli_real_escape_string($con, (int) $_POST['cpi2']);
+  $cpi3 = mysqli_real_escape_string($con, (int) $_POST['cpi3']);
+  $cpi4 = mysqli_real_escape_string($con, (int) $_POST['cpi4']);
+  $cpi5 = mysqli_real_escape_string($con, (int) $_POST['cpi5']);
+  $cpi6 = mysqli_real_escape_string($con, (int) $_POST['cpi6']);
+
+  $spi1 = mysqli_real_escape_string($con, (int) $_POST['spi1']);
+  $spi2 = mysqli_real_escape_string($con, (int) $_POST['spi2']);
+  $spi3 = mysqli_real_escape_string($con, (int) $_POST['spi3']);
+  $spi4 = mysqli_real_escape_string($con, (int) $_POST['spi4']);
+  $spi5 = mysqli_real_escape_string($con, (int) $_POST['spi5']);
+  $spi6 = mysqli_real_escape_string($con, (int) $_POST['spi6']);
+
+  // $sem2 = mysqli_real_escape_string($con, (int) $_POST['Chem']);
+  // $gujchem = mysqli_real_escape_string($con, (int) $_POST['Guj_Chem']);
+  // $phy = mysqli_real_escape_string($con, (int) $_POST['Phy']);
+  // $gujphy = mysqli_real_escape_string($con, (int) $_POST['Guj_Phy']);
+  // $eng = mysqli_real_escape_string($con, (int) $_POST['Eng']);
+  // $chempr = mysqli_real_escape_string($con, (int) $_POST['Chempr']);
+  // $aggregate = mysqli_real_escape_string($con, (float) $_POST['aggregate']);
+  // $phypr = mysqli_real_escape_string($con, (int) $_POST['Phypr']);
+  // $pcm = mysqli_real_escape_string($con, (float) $_POST['pcm']);
+  // $comp = mysqli_real_escape_string($con, (int) $_POST['Comp']);
+  // $gujper = mysqli_real_escape_string($con, (float) $_POST['gujper']);
+  // $comppr = mysqli_real_escape_string($con, (int) $_POST['Comppr']);
 
   $address = mysqli_real_escape_string($con, $_POST['address']);
   $pincode = mysqli_real_escape_string($con, $_POST['pincode']);
@@ -66,12 +75,24 @@ if (isset($_POST['register'])) {
   $check = mysqli_real_escape_string($con, $_POST['check']);
 
   $acpcmeritno = mysqli_real_escape_string($con, $_POST['acpcmeritno']);
-  $acpcmeritmarks = mysqli_real_escape_string($con, (double) $_POST['acpcmeritmarks']);
+  $acpcmeritmarks = mysqli_real_escape_string($con, (float)$_POST['acpcmeritmarks']);
   $acpcappno = mysqli_real_escape_string($con, $_POST['acpcappno']);
   $aadhar = mysqli_real_escape_string($con, $_POST['aadhar']);
 
+  $enrolno = mysqli_real_escape_string($con, $_POST['enrolno']);
+  $dipyear = mysqli_real_escape_string($con, $_POST['dipyear']);
+  $cgpa = mysqli_real_escape_string($con, $_POST['cgpa']);
+  $back1 = mysqli_real_escape_string($con, (int)$_POST['back1']);
+  $back2 = mysqli_real_escape_string($con, (int)$_POST['back2']);
+  $back3 = mysqli_real_escape_string($con, (int)$_POST['back3']);
+  $back4 = mysqli_real_escape_string($con, (int)$_POST['back4']);
+  $back5 = mysqli_real_escape_string($con, (int)$_POST['back5']);
+  $back6 = mysqli_real_escape_string($con, (int)$_POST['back6']);
+
+
   // database insert SQL code
-  $sql = "INSERT INTO student (surname,name,fname,mname,gender,board,category,dob,regno,course,schoolname,hseatno,hpassing,gujappno,gujseatno,Maths,Guj_Maths,Chem,Guj_Chem,Phy,Guj_Phy,Eng,Chempr,average,Phypr,pcm,Comp,gujper,Comppr,address,pincode,email,smobno,pmobno,declared,acpcmeritno,acpcmeritmarks,acpcappno,aadhar) VALUES ('$surname', '$name', '$fname', '$mname','$gender','$board','$category','$dob','$regno','$course','$sname','$hseatno','$hpassing','$gujappno','$gujseatno','$maths','$gujmaths','$chem','$gujchem','$phy','$gujphy','$eng','$chempr','$aggregate','$phypr','$pcm','$comp','$gujper','$comppr','$address','$pincode','$email','$smobno','$pmobno','$check','$acpcmeritno','$acpcmeritmarks','$acpcappno','$aadhar')";
+  $sql = "INSERT INTO dipstudent (surname,name,fname,mname,gender,university,category,dob,regno,course,collegename,spi1,spi2,spi3,spi4,spi5,spi6,cpi1,cpi2,cpi3,cpi4,cpi5,cpi6,address,pincode,email,smobno,pmobno,declared,acpcmeritno,acpcmeritmarks,acpcappno,aadhar,enrolno,dipyear,cgpa,back1,back2,back3,back4,back5,back6) VALUES 
+  ('$surname', '$name', '$fname', '$mname','$gender','$university','$category','$dob','$regno','$course','$collegename','$spi1','$spi2','$spi3','$spi4','$spi5','$spi6','$cpi1','$cpi2','$cpi3','$cpi4','$cpi5','$cpi6','$address','$pincode','$email','$smobno','$pmobno','$check','$acpcmeritno','$acpcmeritmarks','$acpcappno','$aadhar','$enrolno','$dipyear','$cgpa','$back1','$back2','$back3','$back4','$back5','$back6')";
 
   // insert into database 
   $rs = mysqli_query($con, $sql);
@@ -94,7 +115,7 @@ if (isset($_POST['register'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Registration Form</title>
+  <title>D2D Student Registration Form</title>
   <link rel="stylesheet" href="style.css" />
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -116,33 +137,45 @@ if (isset($_POST['register'])) {
 
   <div class="wrapper">
     <div class="title" text-align="center">
-      <h5>STUDENT REGISTRATION FORM </h5>
+      <h5>D2D STUDENT REGISTRATION FORM </h5>
     </div>
     <form method="POST" action="" data-netlify="true">
       <div class="form">
 
+      <div class="inputfield">
+          <label>Diploma Enroll. No.</label>
+          <input type="text" class="input" id="aadhar" name="enrolno" placeholder="Diploma Enrollment Number" maxlength="12">
+        </div>
         <div class="inputfield">
           <table>
             <tr>
-            <tr>
-              <td><label>ACPC Merit No</label></td>
-              <td>
-                <input type="text" class="inputhsc" placeholder="ACPC Merit No" name="acpcmeritno" />
-              </td>
-              <td><label>ACPC Merit Marks</label></td>
-              <td>
-                <input type="text" class="inputhsc" placeholder="ACPC Merit Marks" name="acpcmeritmarks" />
-              </td>
-            </tr>
-            </tr>
-            <tr>
-            <tr>
-              <td><label>ACPC Application No.</label></td>
-              <td>
-                <input type="text" class="inputhsc" placeholder="ACPC App No" name="acpcappno" />
-              </td>
-
-            </tr>
+              <tr>
+                <td><label>Diploma Passing Year</label></td>
+                <td>
+                  <input type="text" class="inputhsc" placeholder="Passing Year" name="dipyear" />
+                </td>
+                <td><label>CGPA</label></td>
+                <td>
+                  <input type="text" class="inputhsc" placeholder="CGPA obtained" name="cgpa" />
+                </td>
+              </tr>
+              <tr>
+                <td><label>ACPC Merit No</label></td>
+                <td>
+                  <input type="text" class="inputhsc" placeholder="ACPC Merit No" name="acpcmeritno" />
+                </td>
+                <td><label>ACPC Merit Marks</label></td>
+                <td>
+                  <input type="text" class="inputhsc" placeholder="ACPC Merit Marks" name="acpcmeritmarks" />
+                </td>
+              </tr>
+              <tr>
+                <tr>
+                  <td><label>ACPC Application No.</label></td>
+                  <td>
+                    <input type="text" class="inputhsc" placeholder="ACPC App No" name="acpcappno" />
+                  </td>
+                </tr>
             </tr>
           </table>
         </div>
@@ -199,20 +232,13 @@ if (isset($_POST['register'])) {
             GSEB
             <input type="radio" value="CBSE" id="radio" name="board" /> CBSE
             <input type="radio" value="ICSE" id="radio" name="board" /> ISCE
-            <input type="radio" value="Other" id="radio" name="board" /> Other
+            <input type="radio" value="Other  " id="radio" name="board" /> Other
           </div-->
 
-        <div class="inputfield">
-          <label>Board</label>
-          <div class="custom_select">
-            <select id="board" name="board" required>
-              <option value="">--Select your choice--</option>
-              <option value="GSEB">GSEB</option>
-              <option value="CBSE">CBSE</option>
-              <option value="ICSE">ICSE</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+          <div class="inputfield">
+          <label>University Name</label>
+          <input type="text" class="input" id="uname" name="uname" placeholder="Enter University Name" maxlength="30"
+            pattern="[A-Za-z]{1,32}" title="Enter only alphabets" required />
         </div>
 
 
@@ -297,11 +323,11 @@ if (isset($_POST['register'])) {
         </div>
 
         <div class="inputfield">
-          <label>School Name:</label>
-          <input type="text" class="input" id="name" name="schoolname" placeholder="Enter School Name" maxlength="100"
+          <label>College Name:</label>
+          <input type="text" class="input" id="collegename" name="collegename" placeholder="Enter College Name" maxlength="100"
             pattern="[a-zA-Z][a-zA-Z0-9\s]*" title="Enter only alphabets and spaces" required />
         </div>
-        <div class="inputfield">
+        <!--div class="inputfield">
           <table>
             <tr>
             <tr>
@@ -328,95 +354,95 @@ if (isset($_POST['register'])) {
             </tr>
             </tr>
           </table>
-        </div>
+        </div-->
 
         <div class="inputfield">
           <table>
             <tr>
               <td text-align="center">
-                <b><label>SUBJECTS</label></b>
+                <b><label>SEMESTER</label></b>
               </td>
               <td text-align="center">
-                <b><label>12th Marks</label></b>
+                <b><label>SPI</label></b>
               </td>
               <td text-align="center">
-                <b><label>GUJCET Marks</label></b>
+                <b><label>CPI</label></b>
+              </td>
+              <td text-align="center">
+                <b><label>BACKLOG COUNT</label></b>
+              </td>
+            </tr>
+            <tr>
+              <td><label>SEM I</label></td>
+              <td>
+                <input type="text" class="input1" name="spi1" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="cpi1" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="back1" maxlength="4" />
               </td>
             </tr>
 
             <tr>
-              <td><label>MATHEMATICS</label></td>
+              <td><label>SEM II</label></td>
               <td>
-                <input type="text" class="input1" name="Maths" maxlength="3" />
-              </td>
-
-              <td>
-                <input type="text" class="input1" name="Guj_Maths" maxlength="3" />
-              </td>
-            </tr>
-
-            <tr>
-              <td><label>CHEMISTRY(Theory)</label></td>
-              <td>
-                <input type="text" class="input1" name="Chem" maxlength="3" />
+                <input type="text" class="input1" name="spi2" maxlength="4" />
               </td>
               <td>
-                <input type="text" class="input1" name="Guj_Chem" maxlength="3" />
+                <input type="text" class="input1" name="cpi2" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="back2" maxlength="4" />
               </td>
             </tr>
             <tr>
-              <td><label>PHYSICS(Theory)</label></td>
+              <td><label>SEM III</label></td>
               <td>
-                <input type="text" class="input1" name="Phy" maxlength="3" />
+                <input type="text" class="input1" name="spi3" maxlength="4" />
               </td>
               <td>
-                <input type="text" class="input1" name="Guj_Phy" maxlength="3" />
+                <input type="text" class="input1" name="cpi3" maxlength="4" />
               </td>
-            </tr>
-            <tr>
-              <td><label>ENGLISH</label></td>
               <td>
-                <input type="text" class="input1" name="Eng" maxlength="3" />
+                <input type="text" class="input1" name="back3" maxlength="4" />
               </td>
             </tr>
             <tr>
-              <td><label>CHEMISTRY(Practical)</label></td>
+              <td><label>SEM IV</label></td>
               <td>
-                <input type="text" class="input1" name="Chempr" maxlength="3" />
+                <input type="text" class="input1" name="spi4" maxlength="4" />
               </td>
-
-
-              <td><label>Aggregate % of 12th</label></td>
               <td>
-                <input type="text" class="inputhsc" name="aggregate" />
+                <input type="text" class="input1" name="cpi4" maxlength="4" />
               </td>
-            </tr>
-            <tr>
-              <td><label>PHYSICS(Practical)</label></td>
               <td>
-                <input type="text" class="input1" name="Phypr" maxlength="3" />
-              </td>
-
-              <td><label>PCM Percentile</label></td>
-              <td>
-                <input type="text" class="inputhsc" name="pcm" />
-              </td>
-
-            </tr>
-            <tr>
-              <td><label>COMPUTER(Theory)</label></td>
-              <td>
-                <input type="text" class="input1" name="Comp" maxlength="3" />
-              </td>
-              <td><label>GUJCET Percentile</label></td>
-              <td>
-                <input type="text" class="inputhsc" name="gujper" />
+                <input type="text" class="input1" name="back4" maxlength="4" />
               </td>
             </tr>
             <tr>
-              <td><label>COMPUTER(Practical)</label></td>
+              <td><label>SEM V</label></td>
               <td>
-                <input type="text" class="input1" name="Comppr" maxlength="3" />
+                <input type="text" class="input1" name="spi5" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="cpi5" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="back5" maxlength="4" />
+              </td>
+            </tr>
+            <tr>
+              <td><label>SEM VI</label></td>
+              <td>
+                <input type="text" class="input1" name="spi6" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="cpi6" maxlength="4" />
+              </td>
+              <td>
+                <input type="text" class="input1" name="back6" maxlength="4" />
               </td>
             </tr>
           </table>

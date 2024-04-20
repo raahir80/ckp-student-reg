@@ -448,7 +448,7 @@ if (isset($_POST['register'])) {
             </select>
           </div>
           <input type="tel" class="input" name="smobno" maxlength="10" id="phone-number"
-            placeholder="Enter Student phone number" pattern="[7-9]{1}[0-9]{9}" title="Please enter valid phone number"
+            placeholder="Enter Student phone number" pattern="[6-9]{1}[0-9]{9}" title="Please enter valid phone number"
             required />
         </div>
 
@@ -460,7 +460,7 @@ if (isset($_POST['register'])) {
             </select>
           </div>
           <input type="tel" class="input" name="pmobno" maxlength="10" id="phone-number"
-            placeholder="Enter Parents phone number" pattern="[7-9]{1}[0-9]{9}" title="Please enter valid phone number"
+            placeholder="Enter Parents phone number" pattern="[6-9]{1}[0-9]{9}" title="Please enter valid phone number"
             required />
         </div>
 
